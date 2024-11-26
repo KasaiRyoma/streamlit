@@ -66,9 +66,9 @@ def main():
         process_image(image)
 
     # リセットボタン
-    if st.button("もう一度"):
-        st.session_state.response = None  # 出力をクリア
-        st.experimental_rerun()  # ページをリロードして入力をリセット
+    #if st.button("もう一度"):
+        #st.session_state.response = None  # 出力をクリア
+        #st.experimental_rerun()  # ページをリロードして入力をリセット
 
 if __name__ == '__main__':
     main()
