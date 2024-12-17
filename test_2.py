@@ -14,11 +14,21 @@ def init_page():
             [data-testid="stHeader"], [data-testid="stToolbar"], footer {display: none;}
             .block-container {padding: 0; margin: 0; max-width: 100%; overflow: hidden;}
             img {object-fit: cover;}
+            /* Google Fonts */
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+            /* Custom Noto Sans JP font */
+            .noto-sans-jp-custom {
+                font-family: "Noto Sans JP", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 400; /* Use 400 for normal, 700 for bold, etc. */
+                font-style: normal;
+            }
         </style>
-        """, 
+        """,
         unsafe_allow_html=True
     )
-    
 
 def create_image_with_text(text, width=1920, height=1080, font_size=80):
     # 背景色と文字色
@@ -29,12 +39,8 @@ def create_image_with_text(text, width=1920, height=1080, font_size=80):
     image = Image.new("RGB", (width, height), bg_color)
     draw = ImageDraw.Draw(image)
 
-    # フォント設定（ローカルパス）
-    try:
-        font_path = "C:/Users/flogt/OneDrive/ドキュメント/NotoSansCJKjp-Regular.otf"  # フォントパスを指定
-        font = ImageFont.truetype(font_path, font_size)
-    except IOError:
-        font = ImageFont.load_default()  # フォントがない場合はデフォルトフォント
+    # フォント設定
+    font = ImageFont.truetype("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap", font_size)
 
     # テキストサイズを計算し中央に配置
     text_bbox = draw.textbbox((0, 0), text, font=font)
@@ -116,7 +122,6 @@ def main():
                 )
             ]
 
-            
             try:
                 response = llm.invoke(query)
                 generated_text = response.content.strip()
