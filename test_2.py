@@ -15,8 +15,9 @@ if "captured_frame" not in st.session_state:
 
 # カメラ撮影機能
 def capture_image():
+    captured_frame = None  # 変数を初期化
     try:
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(0)  # カメラを起動
         if not cap.isOpened():
             st.error("カメラが起動できませんでした。デバイスを確認してください。")
             return None
@@ -24,17 +25,17 @@ def capture_image():
         st.write("カメラ起動中...")
         time.sleep(3)  # 3秒待機
         ret, frame = cap.read()
-        cap.release()
+        cap.release()  # カメラリソースを解放
 
-        if not ret:
+        if ret:
+            captured_frame = frame
+        else:
             st.error("画像を取得できませんでした。")
-            return None
-
-        return frame
 
     except Exception as e:
         st.error(f"エラーが発生しました: {e}")
-        return None
+
+    return captured_frame  # 初期化した変数を確実に返す
 
 # 画像のキャプチャと表示
 if st.session_state.captured_frame is None:
