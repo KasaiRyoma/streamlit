@@ -54,7 +54,8 @@ def main():
             with st.spinner('生成中...'):
                 try:
                     st.session_state.response = llm.stream(query)
-                    st.write(st.session_state.response)
+                    if st.session_state.response:
+                        st.write(st.session_state.response.get('choices')[0]['text'])  # 出力を取得
                 except Exception as e:
                     st.error(f"生成中にエラーが発生しました: {e}")
 
@@ -64,11 +65,6 @@ def main():
     # 撮影された画像がある場合のみ処理を実行
     if image:
         process_image(image)
-
-    # リセットボタン
-    #if st.button("もう一度"):
-        #st.session_state.response = None  # 出力をクリア
-        #st.experimental_rerun()  # ページをリロードして入力をリセット
 
 if __name__ == '__main__':
     main()
