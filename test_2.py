@@ -7,11 +7,12 @@ st.markdown(
     /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
         position: fixed;
-        top: 50%; /* 垂直方向中央 */
-        left: 50%; /* 水平方向中央 */
+        top: 0; /* 垂直方向中央 */
+        left: 0; /* 水平方向中央 */
         transform: translate(-50%, -50%); /* 中央揃え調整 */
         width: 100vw; /* 幅をさらに大きく設定 */
         height: 100vh; /* 高さをさらに大きく設定 */
+        object-fit: cover;
         font-size: 2rem; /* フォントサイズをさらに大きく */
         background-color: #007BFF; /* ボタンの背景色 */
         color: white; /* ボタンの文字色 */
@@ -20,7 +21,7 @@ st.markdown(
         display: flex; /* 中央揃え用 */
         align-items: center;
         justify-content: center;
-        z-index: 3; /* カメラ映像の上に配置 */
+        z-index: 1; /* カメラ映像の上に配置 */
     }
 
     /* ホバー時のエフェクト */
@@ -37,7 +38,7 @@ st.markdown(
         cursor: pointer;
     }
     /*[data-testid="stCameraInputWebcamComponent"] video {
-        z-index: 1;
+        z-index: 3;
         opacity: 1; /* 映像を表示 */
     }*/
     
