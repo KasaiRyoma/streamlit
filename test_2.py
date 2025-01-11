@@ -1,29 +1,33 @@
 import streamlit as st
 
-# カスタムCSSを適用してボタンを大きく変更
+# カスタムCSSを適用してボタンをカメラ映像の中央に配置
 st.markdown(
     """
     <style>
-    /* 切り替えボタンを大きくする */
+    /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
-        width: 100px; /* 幅を変更 */
-        height: 100px; /* 高さを変更 */
-        font-size: 1.5rem; /* テキストサイズを大きく */
-        border-radius: 10px; /* 角を丸める */
-        background-color: #007BFF; /* 背景色を変更 */
-        color: white; /* テキスト色を変更 */
+        position: absolute;
+        top: 50%; /* 垂直方向中央 */
+        left: 50%; /* 水平方向中央 */
+        transform: translate(-50%, -50%); /* 中央揃え調整 */
+        width: 150px; /* 幅を設定 */
+        height: 150px; /* 高さを設定 */
+        font-size: 1.5rem; /* フォントサイズを大きく */
+        border-radius: 50%; /* 丸いボタン */
+        background-color: #007BFF; /* ボタンの背景色 */
+        color: white; /* ボタンの文字色 */
         border: none; /* 枠線を非表示 */
-        position: relative; /* 必要に応じて位置調整 */
         cursor: pointer; /* ポインタ表示 */
-        display: flex; /* 中央揃えのためにflexを使用 */
+        display: flex; /* 中央揃え用 */
         align-items: center;
         justify-content: center;
+        z-index: 999; /* カメラ映像の上に配置 */
     }
 
-    /* ボタンにホバー時のエフェクトを追加 */
+    /* ホバー時のエフェクト */
     [data-testid="stBaseButton-minimal"]:hover {
         background-color: #0056b3; /* ホバー時の背景色 */
-        transform: scale(1.1); /* ホバー時に拡大 */
+        transform: translate(-50%, -50%) scale(1.1); /* 拡大エフェクト */
     }
     </style>
     """,
