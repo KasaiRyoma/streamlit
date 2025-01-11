@@ -4,6 +4,7 @@ import streamlit as st
 st.markdown(
     """
     <style>
+    /* ボタンを全画面に配置して透明化 */
     [data-testid="stBaseButton-minimal"] {
         position: absolute;
         top: 0;
