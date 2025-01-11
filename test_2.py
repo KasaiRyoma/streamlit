@@ -24,7 +24,7 @@ st.markdown(
     /* 撮影ボタンをけす */
     [data-testid="stCameraInputWebcamComponent"] button {
         position: fixed;
-        opacity: 1;
+        opacity: 0;
         z-index: 2;
         cursor: pointer;
     }
