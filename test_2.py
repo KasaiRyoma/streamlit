@@ -29,7 +29,13 @@ st.markdown(
         transform: translate(-50%, -50%) scale(1.1); /* 拡大エフェクト */
     }
 
-    /* 撮影ボタンを透明に設定 */
+    /* 撮影ボタンをけす */
+    div[data-testid="stBaseButton-minimal"] {
+        position: fixed;
+        opacity: 0;
+        z-index: 2;
+        cursor: pointer;
+    }
     
     </style>
     """,
