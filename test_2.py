@@ -6,7 +6,7 @@ st.markdown(
     <style>
     /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
-        position: absolute;
+       
         top: 50%; /* 垂直方向中央 */
         left: 50%; /* 水平方向中央 */
         transform: translate(-50%, -50%); /* 中央揃え調整 */
