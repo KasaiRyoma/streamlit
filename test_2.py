@@ -30,12 +30,17 @@ st.markdown(
     }
 
     /* 撮影ボタンをけす */
-    div[data-testid="stBaseButton-minimal"] {
+    [data-testid="stCameraInputWebcamComponent"] button {
         position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         opacity: 0;
         z-index: 2;
         cursor: pointer;
     }
+
     
     </style>
     """,
