@@ -31,7 +31,7 @@ st.markdown(
 
     /* カメラ映像をフルスクリーン表示 */
     [data-testid="stCameraInputWebcamComponent"] video {
-        z-index: 0;
+        z-index: 3;
         top: 0;
         left: 0;
         width: 100vw;
