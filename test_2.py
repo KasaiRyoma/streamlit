@@ -4,30 +4,38 @@ import streamlit as st
 st.markdown(
     """
     <style>
-    /* 切り替えボタンをカメラ映像の中央に配置 */
-    [data-testid="stBaseButton-minimal"] {
+    /* ボタンの親要素のスタイル調整 */
+    [data-testid="stCameraInputWebcamStyledBox"] {
+        position: relative; /* 子要素の絶対配置を可能に */
+    }
+
+    /* SVGボタンを中央に配置 */
+    .st-emotion-cache-clky9d {
         position: absolute;
-        top: 50%; /* 垂直方向中央 */
-        left: 50%; /* 水平方向中央 */
-        transform: translate(-50%, -50%); /* 中央揃え調整 */
-        width: 150px; /* 幅を設定 */
-        height: 150px; /* 高さを設定 */
-        font-size: 1.5rem; /* フォントサイズを大きく */
+        top: 50%; /* 親要素の垂直方向の中央 */
+        left: 50%; /* 親要素の水平方向の中央 */
+        transform: translate(-50%, -50%); /* 完全に中央揃え */
+        width: 50px; /* ボタンの幅を調整 */
+        height: 50px; /* ボタンの高さを調整 */
+        cursor: pointer; /* ポインタを表示 */
+        background-color: rgba(0, 0, 0, 0.6); /* 半透明の背景を追加 */
         border-radius: 50%; /* 丸いボタン */
-        background-color: #007BFF; /* ボタンの背景色 */
-        color: white; /* ボタンの文字色 */
-        border: none; /* 枠線を非表示 */
-        cursor: pointer; /* ポインタ表示 */
-        display: flex; /* 中央揃え用 */
+        display: flex; /* アイコンの中央揃え */
         align-items: center;
         justify-content: center;
-        z-index: 999; /* カメラ映像の上に配置 */
+    }
+
+    /* SVGのアイコンサイズを調整 */
+    .st-emotion-cache-clky9d svg {
+        width: 24px; /* SVGアイコンの幅 */
+        height: 24px; /* SVGアイコンの高さ */
+        fill: #ffffff; /* アイコンの色 */
     }
 
     /* ホバー時のエフェクト */
-    [data-testid="stBaseButton-minimal"]:hover {
-        background-color: #0056b3; /* ホバー時の背景色 */
-        transform: translate(-50%, -50%) scale(1.1); /* 拡大エフェクト */
+    .st-emotion-cache-clky9d:hover {
+        background-color: rgba(0, 0, 0, 0.8); /* ホバー時に濃い背景色 */
+        transform: translate(-50%, -50%) scale(1.1); /* 拡大アニメーション */
     }
     </style>
     """,
