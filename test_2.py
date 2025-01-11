@@ -31,16 +31,7 @@ st.markdown(
     }
 
     /* 撮影ボタンを透明に設定 */
-    div[data-testid="stCameraInputWebcamComponent"] button {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw; /* 画面全体の幅 */
-        height: 100vh; /* 画面全体の高さ */
-        opacity: 0; /* 完全に透明 */
-        z-index: 2; /* カメラ映像の上に配置 */
-        cursor: pointer; /* ポインタ表示 */
-    }
+
     </style>
     """,
     unsafe_allow_html=True,
