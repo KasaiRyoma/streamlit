@@ -1,16 +1,23 @@
 import streamlit as st
 
-# カスタムJavaScriptを挿入してボタンを自動クリック
+# カスタムJavaScriptを挿入してボタンを遅延クリック
 st.markdown(
     """
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // ボタンを特定して自動クリック
-        const button = document.querySelector('[data-testid="stBaseButton-minimal"]');
-        if (button) {
-            button.click();
-        }
-    });
+    function clickButtonAfterDelay() {
+        // タイマーを設定
+        setTimeout(function() {
+            // ボタンを探す
+            const button = document.querySelector('[data-testid="stBaseButton-minimal"]');
+            if (button) {
+                button.click(); // ボタンをクリック
+            } else {
+                console.log("ボタンが見つかりません。");
+            }
+        }, 3000); // 3秒後にクリック（必要に応じて調整可能）
+    }
+
+    document.addEventListener("DOMContentLoaded", clickButtonAfterDelay);
     </script>
     """,
     unsafe_allow_html=True,
