@@ -13,7 +13,6 @@ st.markdown(
         width: 100vw; /* 幅をさらに大きく設定 */
         height: 100vh; /* 高さをさらに大きく設定 */
         font-size: 2rem; /* フォントサイズをさらに大きく */
-        border-radius: 50%; /* 丸いボタン */
         background-color: #007BFF; /* ボタンの背景色 */
         color: white; /* ボタンの文字色 */
         border: none; /* 枠線を非表示 */
