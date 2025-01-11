@@ -10,8 +10,8 @@ st.markdown(
         top: 50%; /* 垂直方向中央 */
         left: 50%; /* 水平方向中央 */
         transform: translate(-50%, -50%); /* 中央揃え調整 */
-        width: 200px; /* ボタンの幅 */
-        height: 200px; /* ボタンの高さ */
+        width: 100vw; /* ボタンの幅 */
+        height: 100vh; /* ボタンの高さ */
         font-size: 2rem; /* フォントサイズ */
         border-radius: 50%; /* 丸いボタン */
         background-color: #007BFF; /* ボタンの背景色 */
@@ -31,7 +31,7 @@ st.markdown(
     }
 
     /* 撮影ボタンを透明に設定 */
-
+    
     </style>
     """,
     unsafe_allow_html=True,
