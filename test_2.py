@@ -10,9 +10,9 @@ st.markdown(
         top: 50%; /* 垂直方向中央 */
         left: 50%; /* 水平方向中央 */
         transform: translate(-50%, -50%); /* 中央揃え調整 */
-        width: 150px; /* 幅を設定 */
-        height: 150px; /* 高さを設定 */
-        font-size: 1.5rem; /* フォントサイズを大きく */
+        width: 200px; /* 幅をさらに大きく設定 */
+        height: 200px; /* 高さをさらに大きく設定 */
+        font-size: 2rem; /* フォントサイズをさらに大きく */
         border-radius: 50%; /* 丸いボタン */
         background-color: #007BFF; /* ボタンの背景色 */
         color: white; /* ボタンの文字色 */
