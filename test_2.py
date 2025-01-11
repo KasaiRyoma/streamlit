@@ -1,21 +1,17 @@
 import streamlit as st
 
-# カスタムCSSを適用してカメラボタンを全画面に配置し、透明化
+# カスタムJavaScriptを挿入してボタンを自動クリック
 st.markdown(
     """
-    <style>
-    /* ボタンを全画面に配置して透明化 */
-    [data-testid="stBaseButton-minimal"] {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw; /* 画面全体の幅 */
-        height: 100vh; /* 画面全体の高さ */
-        opacity: 0; /* ボタンを透明にする */
-        z-index: 999; /* 最前面に配置 */
-        cursor: pointer; /* ポインタの見た目を維持 */
-    }
-    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // ボタンを特定して自動クリック
+        const button = document.querySelector('[data-testid="stBaseButton-minimal"]');
+        if (button) {
+            button.click();
+        }
+    });
+    </script>
     """,
     unsafe_allow_html=True,
 )
