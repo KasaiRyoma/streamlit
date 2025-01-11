@@ -37,7 +37,6 @@ st.markdown(
         cursor: pointer;
     }
     [data-testid="stCameraInputWebcamComponent"] video {
-        position: fixed;
         z-index: 1;
         opacity: 1; /* 映像を表示 */
     }
