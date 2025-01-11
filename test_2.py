@@ -1,43 +1,62 @@
 import streamlit as st
 
-# カスタムCSSを適用して切り替えボタンと撮影ボタンを編集
+# カスタムCSSとJavaScriptを適用
 st.markdown(
     """
     <style>
     /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
         position: fixed;
-        top: 0; /* 垂直方向中央 */
-        left: 0; /* 水平方向中央 */
-        width: 100vw; /* 幅をさらに大きく設定 */
-        height: 100vh; /* 高さをさらに大きく設定 */
-        object-fit: cover;
-        font-size: 2rem; /* フォントサイズをさらに大きく */
-        background-color: #007BFF; /* ボタンの背景色 */
-        color: white; /* ボタンの文字色 */
-        border: none; /* 枠線を非表示 */
-        z-index: 1; /* カメラ映像の上に配置 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        height: 50px;
+        font-size: 1.2rem;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        z-index: 1;
+        cursor: pointer;
     }
 
-    
-
-    /* 撮影ボタンをけす */
+    /* 撮影ボタンを透明化 */
     [data-testid="stCameraInputWebcamComponent"] button {
-        position: fixed;
         opacity: 0;
+        position: fixed;
         z-index: 2;
         cursor: pointer;
     }
-    /*[data-testid="stCameraInputWebcamComponent"] video {
-        z-index: 3;
-        opacity: 1; /* 映像を表示 */
-        top: 0; /* 垂直方向中央 */
-        left: 0; /* 水平方向中央 */
-        width: 100vw; /* 幅をさらに大きく設定 */
-        height: 100vh; /* 高さをさらに大きく設定 */
-    }*/
-    
+
+    /* カメラ映像をフルスクリーン表示 */
+    [data-testid="stCameraInputWebcamComponent"] video {
+        z-index: 0;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
     </style>
+
+    <script>
+        // ページロード後に実行
+        document.addEventListener("DOMContentLoaded", function () {
+            // 切り替えボタンと撮影ボタンを取得
+            const switchButton = document.querySelector('[data-testid="stBaseButton-minimal"]');
+            const captureButton = document.querySelector('[data-testid="stCameraInputWebcamComponent"] button');
+
+            if (switchButton && captureButton) {
+                // 切り替えボタンがクリックされたら撮影ボタンを自動で押す
+                switchButton.addEventListener("click", function () {
+                    setTimeout(() => {
+                        captureButton.click();
+                    }, 500); // 0.5秒後に撮影ボタンをクリック
+                });
+            }
+        });
+    </script>
     """,
     unsafe_allow_html=True,
 )
@@ -47,4 +66,4 @@ image = st.camera_input("Take a picture")
 
 # 撮影された画像を表示
 if image:
-    st.image(image)
+    st.image(image, caption="Captured Image", use_column_width=True)
