@@ -9,7 +9,6 @@ st.markdown(
         position: fixed;
         top: 0; /* 垂直方向中央 */
         left: 0; /* 水平方向中央 */
-        transform: translate(-50%, -50%); /* 中央揃え調整 */
         width: 100vw; /* 幅をさらに大きく設定 */
         height: 100vh; /* 高さをさらに大きく設定 */
         object-fit: cover;
@@ -17,10 +16,6 @@ st.markdown(
         background-color: #007BFF; /* ボタンの背景色 */
         color: white; /* ボタンの文字色 */
         border: none; /* 枠線を非表示 */
-        cursor: pointer; /* ポインタ表示 */
-        display: flex; /* 中央揃え用 */
-        align-items: center;
-        justify-content: center;
         z-index: 1; /* カメラ映像の上に配置 */
     }
 
