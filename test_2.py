@@ -36,10 +36,10 @@ st.markdown(
         z-index: 2;
         cursor: pointer;
     }
-    [data-testid="stCameraInputWebcamComponent"] video {
+    /*[data-testid="stCameraInputWebcamComponent"] video {
         z-index: 1;
         opacity: 1; /* 映像を表示 */
-    }
+    }*/
     
     </style>
     """,
