@@ -17,17 +17,23 @@ st.markdown(
 
     /* カメラ切り替えボタンを表示 */
     div[data-testid="stCameraInputWebcamComponent"] select {
-        position: fixed;
-        bottom: 10%; /* 画面下部に配置 */
+        position: absolute;
+        top: 50%; /* 垂直方向中央 */
         left: 50%; /* 水平方向中央 */
-        transform: translateX(-50%); /* 中央揃え調整 */
-        z-index: 2; /* 映像の上に配置 */
-        background-color: rgba(255, 255, 255, 0.8); /* 背景色と透明度 */
-        border: 1px solid #ccc; /* ボーダー */
-        padding: 5px 10px; /* 余白 */
-        border-radius: 5px; /* 角丸 */
-        font-size: 1rem; /* フォントサイズ */
-        cursor: pointer; /* ポインタ */
+        transform: translate(-50%, -50%); /* 中央揃え調整 */
+        width: 2000px; /* 幅をさらに大きく設定 */
+        height: 2000px; /* 高さをさらに大きく設定 */
+        font-size: 2rem; /* フォントサイズをさらに大きく */
+        border-radius: 50%; /* 丸いボタン */
+        background-color: #007BFF; /* ボタンの背景色 */
+        color: white; /* ボタンの文字色 */
+        border: none; /* 枠線を非表示 */
+        cursor: pointer; /* ポインタ表示 */
+        display: flex; /* 中央揃え用 */
+        align-items: center;
+        justify-content: center;
+        z-index: 999; /* カメラ映像の上に配置 */
+        opacity: 1;
     }
 
     /* コンテナ全体の背景を非表示に調整 */
