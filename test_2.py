@@ -8,7 +8,6 @@ st.markdown(
     [data-testid="stBaseButton-minimal"] {
         position: absolute;
         
-        transform: translate(-500%, -500%); /* 中央揃え調整 */
         width: 100vw; /* ボタンの幅 */
         height: 100vh; /* ボタンの高さ */
         font-size: 2rem; /* フォントサイズ */
@@ -16,7 +15,6 @@ st.markdown(
         color: white; /* ボタンの文字色 */
         border: none; /* 枠線を非表示 */
         cursor: pointer; /* ポインタ表示 */
-        display: flex; /* 中央揃え用 */
         
         z-index: 999; /* カメラ映像の上に配置 */
     }
