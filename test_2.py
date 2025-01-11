@@ -1,29 +1,36 @@
 import streamlit as st
 
-# カスタムJavaScriptを挿入してボタンを遅延クリック
+# カスタムCSSを適用してボタンを大きく変更
 st.markdown(
     """
-    <script>
-    function clickButtonAfterDelay() {
-        // タイマーを設定
-        setTimeout(function() {
-            // ボタンを探す
-            const button = document.querySelector('[data-testid="stBaseButton-minimal"]');
-            if (button) {
-                button.click(); // ボタンをクリック
-            } else {
-                console.log("ボタンが見つかりません。");
-            }
-        }, 3000); // 3秒後にクリック（必要に応じて調整可能）
+    <style>
+    /* 切り替えボタンを大きくする */
+    [data-testid="stBaseButton-minimal"] {
+        width: 100px; /* 幅を変更 */
+        height: 100px; /* 高さを変更 */
+        font-size: 1.5rem; /* テキストサイズを大きく */
+        border-radius: 10px; /* 角を丸める */
+        background-color: #007BFF; /* 背景色を変更 */
+        color: white; /* テキスト色を変更 */
+        border: none; /* 枠線を非表示 */
+        position: relative; /* 必要に応じて位置調整 */
+        cursor: pointer; /* ポインタ表示 */
+        display: flex; /* 中央揃えのためにflexを使用 */
+        align-items: center;
+        justify-content: center;
     }
 
-    document.addEventListener("DOMContentLoaded", clickButtonAfterDelay);
-    </script>
+    /* ボタンにホバー時のエフェクトを追加 */
+    [data-testid="stBaseButton-minimal"]:hover {
+        background-color: #0056b3; /* ホバー時の背景色 */
+        transform: scale(1.1); /* ホバー時に拡大 */
+    }
+    </style>
     """,
     unsafe_allow_html=True,
 )
 
-# カメラ入力を使用
+# カメラ入力
 image = st.camera_input("Take a picture")
 
 # 撮影された画像を表示
