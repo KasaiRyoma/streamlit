@@ -20,7 +20,7 @@ st.markdown(
         display: flex; /* 中央揃え用 */
         align-items: center;
         justify-content: center;
-        z-index: 999; /* カメラ映像の上に配置 */
+        z-index: 3; /* カメラ映像の上に配置 */
     }
 
     /* ホバー時のエフェクト */
