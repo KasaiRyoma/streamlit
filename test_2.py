@@ -19,11 +19,7 @@ st.markdown(
         z-index: 1; /* カメラ映像の上に配置 */
     }
 
-    /* ホバー時のエフェクト */
-    [data-testid="stBaseButton-minimal"]:hover {
-        background-color: #0056b3; /* ホバー時の背景色 */
-        transform: translate(-50%, -50%) scale(1.1); /* 拡大エフェクト */
-    }
+    
 
     /* 撮影ボタンをけす */
     [data-testid="stCameraInputWebcamComponent"] button {
