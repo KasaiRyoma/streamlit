@@ -7,18 +7,16 @@ st.markdown(
     /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 150px;
-        height: 50px;
-        font-size: 1.2rem;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        z-index: 1;
-        cursor: pointer;
+        top: 0; /* 垂直方向中央 */
+        left: 0; /* 水平方向中央 */
+        width: 100vw; /* 幅をさらに大きく設定 */
+        height: 100vh; /* 高さをさらに大きく設定 */
+        object-fit: cover;
+        font-size: 2rem; /* フォントサイズをさらに大きく */
+        background-color: #007BFF; /* ボタンの背景色 */
+        color: white; /* ボタンの文字色 */
+        border: none; /* 枠線を非表示 */
+        z-index: 1; /* カメラ映像の上に配置 */
     }
 
     /* 撮影ボタンを透明化 */
