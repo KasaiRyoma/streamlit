@@ -7,21 +7,22 @@ st.markdown(
     /* 切り替えボタンをカメラ映像の中央に配置 */
     [data-testid="stBaseButton-minimal"] {
         position: fixed;
-        top: 0; /* 垂直方向中央 */
-        left: 0; /* 水平方向中央 */
-        width: 100vw; /* 幅をさらに大きく設定 */
-        height: 100vh; /* 高さをさらに大きく設定 */
-        object-fit: cover;
-        font-size: 2rem; /* フォントサイズをさらに大きく */
-        background-color: #007BFF; /* ボタンの背景色 */
-        color: white; /* ボタンの文字色 */
-        border: none; /* 枠線を非表示 */
-        z-index: 1; /* カメラ映像の上に配置 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 60px;
+        font-size: 1.5rem;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        z-index: 10;
+        cursor: pointer;
     }
 
-    /* 撮影ボタンを透明化 */
+    /* 撮影ボタンを透明化しない */
     [data-testid="stCameraInputWebcamComponent"] button {
-        opacity: 0;
         position: fixed;
         z-index: 2;
         cursor: pointer;
@@ -29,7 +30,7 @@ st.markdown(
 
     /* カメラ映像をフルスクリーン表示 */
     [data-testid="stCameraInputWebcamComponent"] video {
-        z-index: 3;
+        z-index: 0;
         top: 0;
         left: 0;
         width: 100vw;
@@ -39,18 +40,15 @@ st.markdown(
     </style>
 
     <script>
-        // ページロード後に実行
         document.addEventListener("DOMContentLoaded", function () {
-            // 切り替えボタンと撮影ボタンを取得
             const switchButton = document.querySelector('[data-testid="stBaseButton-minimal"]');
-            const captureButton = document.querySelector('[data-testid="stCameraInputWebcamComponent"] button');
 
-            if (switchButton && captureButton) {
-                // 切り替えボタンがクリックされたら撮影ボタンを自動で押す
+            if (switchButton) {
                 switchButton.addEventListener("click", function () {
-                    setTimeout(() => {
-                        captureButton.click();
-                    }, 500); // 0.5秒後に撮影ボタンをクリック
+                    console.log("Switch button clicked.");
+                    
+                    // ボタンを消す
+                    switchButton.style.display = "none";
                 });
             }
         });
