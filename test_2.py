@@ -9,7 +9,7 @@ st.markdown(
         position: absolute;
         
         transform: translate(-50%, -50%); /* 中央揃え調整 */
-        width: 100vw; /* ボタンの幅 */
+        width: 200vw; /* ボタンの幅 */
         height: 100vh; /* ボタンの高さ */
         font-size: 2rem; /* フォントサイズ */
         background-color: #007BFF; /* ボタンの背景色 */
