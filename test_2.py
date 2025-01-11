@@ -31,6 +31,10 @@ st.markdown(
     /*[data-testid="stCameraInputWebcamComponent"] video {
         z-index: 3;
         opacity: 1; /* 映像を表示 */
+        top: 0; /* 垂直方向中央 */
+        left: 0; /* 水平方向中央 */
+        width: 100vw; /* 幅をさらに大きく設定 */
+        height: 100vh; /* 高さをさらに大きく設定 */
     }*/
     
     </style>
