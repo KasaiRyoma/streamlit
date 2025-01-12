@@ -1,4 +1,5 @@
 import base64
+import os
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from PIL import Image
@@ -47,8 +48,8 @@ def main():
     init_page()
 
     # フォントファイルをBase64形式で読み込み
-    font_a_base64 = load_font_as_base64("font/OtsutomeFont_Ver3_16.ttf")  # 明るいとき
-    font_b_base64 = load_font_as_base64("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
+    font_a_path = os.path.abspath("font/OtsutomeFont_Ver3_16.ttf")
+    font_b_path = os.path.abspath("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
 
     llm = ChatOpenAI(
         temperature=0,
