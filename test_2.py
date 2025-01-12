@@ -158,7 +158,7 @@ def main():
                 <style>
                     @font-face {{
                         font-family: 'DynamicFont';
-                        src: url('font/OtsutomeFont_Ver3_16.ttf') format('truetype');
+                        src: url({font}) format('truetype');
                     }}
                     .dynamic-text {{
                         font-family: 'DynamicFont', sans-serif;
