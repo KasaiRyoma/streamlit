@@ -5,56 +5,74 @@ import base64
 
 # base64変換用の関数
 def image_to_base64(image):
-    # 画像をバイト形式に変換してbase64にエンコード
     buf = io.BytesIO()
     image.save(buf, format="PNG")
     byte_data = buf.getvalue()
     return base64.b64encode(byte_data).decode()
 
-# タイトルを表示
+# タイトル
 st.title("画像アップロードとフルスクリーン表示")
 
-# 画像アップロードのUIを作成
+# 画像アップロード
 uploaded_file = st.file_uploader("画像をアップロードしてください", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
-    # アップロードされた画像を読み込む
     image = Image.open(uploaded_file)
 
-    # アップロードされた画像を表示
+    # 表示
     st.image(image, caption="アップロードされた画像", use_container_width=True)
 
-    # フルスクリーン表示用のHTMLとJavaScript
+    # フルスクリーン表示用HTMLとJavaScript
     fullscreen_html = f"""
+    <style>
+        #fullscreen-container {{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }}
+        #fullscreen-container img {{
+            max-width: 100%;
+            max-height: 100%;
+        }}
+    </style>
     <div style="text-align: center;">
-        <button onclick="toggleFullscreen()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;border: solid 2px pink; background-color: green;">
+        <button onclick="toggleFullscreen()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
             画像をフルスクリーン表示
         </button>
     </div>
-    <img id="fullscreen-image" src="data:image/png;base64,{image_to_base64(image)}" style="width:100%; display:none;"/>
+    <div id="fullscreen-container">
+        <img src="data:image/png;base64,{image_to_base64(image)}" alt="Fullscreen Image">
+    </div>
     <script>
         function toggleFullscreen() {{
-            const image = document.getElementById("fullscreen-image");
-            if (!document.fullscreenElement) {{
-                // フルスクリーン開始時に画像を表示
-                image.style.display = "block";
-                image.requestFullscreen();
+            const container = document.getElementById("fullscreen-container");
+            if (container.style.display === "none" || container.style.display === "") {{
+                container.style.display = "flex";
+                container.requestFullscreen().catch(err => {{
+                    console.error("フルスクリーンエラー:", err.message);
+                }});
             }} else {{
-                // フルスクリーン終了時に画像を非表示
                 document.exitFullscreen();
-                image.style.display = "none";
+                container.style.display = "none";
             }}
         }}
 
-        // フルスクリーンモード終了時に切れ端が表示されないように
         document.addEventListener("fullscreenchange", function() {{
-            const image = document.getElementById("fullscreen-image");
+            const container = document.getElementById("fullscreen-container");
             if (!document.fullscreenElement) {{
-                image.style.display = "none";  // フルスクリーンを退出した時に画像を非表示
+                container.style.display = "none";
             }}
         }});
     </script>
     """
-    
-    # HTMLをStreamlitに埋め込む
-    st.components.v1.html(fullscreen_html, height=100)
+
+    # HTML埋め込み
+    st.components.v1.html(fullscreen_html, height=0)
