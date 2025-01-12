@@ -183,7 +183,7 @@ def main():
         st.markdown(
             f"""
             <div class="{font_class}">
-                {result2}
+                {result3}
             </div>
             """,
             unsafe_allow_html=True
