@@ -50,7 +50,7 @@ def init_page():
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100%;
+                height: 70vh;
                 font-size: 2em; /* 任意のサイズに変更可能 */
                 text-align: center;
                 font-family: 'OtsutomeFont', sans-serif; /* OtsutomeFont を使用 */
