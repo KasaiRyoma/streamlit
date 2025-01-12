@@ -48,8 +48,8 @@ def main():
     init_page()
 
     # フォントファイルをBase64形式で読み込み
-    font_a_path = os.path.abspath("font/OtsutomeFont_Ver3_16.ttf")
-    font_b_path = os.path.abspath("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
+    font_a = os.path.abspath("font/OtsutomeFont_Ver3_16.ttf")
+    font_b = os.path.abspath("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
 
     llm = ChatOpenAI(
         temperature=0,
@@ -146,19 +146,19 @@ def main():
 
         # CSSを動的に生成
         if result3 == "明るい":
-            font_base64 = font_a_base64
+            font = font_a
         elif result3 == "暗い":
-            font_base64 = font_b_base64
+            font = font_b
         else:
-            font_base64 = None  # デフォルトフォント使用
+            font = None  # デフォルトフォント使用
 
-        if font_base64:
+        if font:
             st.markdown(
                 f"""
                 <style>
                     @font-face {{
                         font-family: 'DynamicFont';
-                        src: url(data:font/ttf;base64,{font_base64}) format('truetype');
+                        src: url('font/OtsutomeFont_Ver3_16.ttf') format('truetype');
                     }}
                     .dynamic-text {{
                         font-family: 'DynamicFont', sans-serif;
@@ -174,6 +174,7 @@ def main():
                 """,
                 unsafe_allow_html=True
             )
+
             font_class = "dynamic-text"
         else:
             font_class = ""  # デフォルトフォント使用
