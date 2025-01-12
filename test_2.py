@@ -48,7 +48,7 @@ def main():
 
     # フォントファイルをBase64形式で読み込み
     font_a_base64 = load_font_as_base64("OtsutomeFont_Ver3_16.ttf")  # 明るいとき
-    font_b_base64 = load_font_as_base64("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
+    font_b_base64 = load_font_as_base64("NotoSansCJKjp-Regular.otf")  # 暗いとき
 
     llm = ChatOpenAI(
         temperature=0,
