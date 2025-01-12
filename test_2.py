@@ -1,5 +1,4 @@
 import base64
-import os
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from PIL import Image
@@ -48,8 +47,8 @@ def main():
     init_page()
 
     # フォントファイルをBase64形式で読み込み
-    font_a = os.path.abspath("font/OtsutomeFont_Ver3_16.ttf")
-    font_b = os.path.abspath("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
+    font_a_base64 = load_font_as_base64("OtsutomeFont_Ver3_16.ttf")  # 明るいとき
+    font_b_base64 = load_font_as_base64("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
 
     llm = ChatOpenAI(
         temperature=0,
@@ -146,19 +145,19 @@ def main():
 
         # CSSを動的に生成
         if result3 == "明るい":
-            font = font_a
+            font_base64 = font_a_base64
         elif result3 == "暗い":
-            font = font_b
+            font_base64 = font_b_base64
         else:
-            font = None  # デフォルトフォント使用
+            font_base64 = None  # デフォルトフォント使用
 
-        if font:
+        if font_base64:
             st.markdown(
                 f"""
                 <style>
                     @font-face {{
                         font-family: 'DynamicFont';
-                        src: url({font}) format('truetype');
+                        src: url(data:font/ttf;base64,{font_base64}) format('truetype');
                     }}
                     .dynamic-text {{
                         font-family: 'DynamicFont', sans-serif;
@@ -174,7 +173,6 @@ def main():
                 """,
                 unsafe_allow_html=True
             )
-
             font_class = "dynamic-text"
         else:
             font_class = ""  # デフォルトフォント使用
@@ -183,7 +181,7 @@ def main():
         st.markdown(
             f"""
             <div class="{font_class}">
-                {result3}
+                {result2}
             </div>
             """,
             unsafe_allow_html=True
