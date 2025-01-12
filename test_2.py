@@ -4,64 +4,51 @@ from langchain_openai import ChatOpenAI
 from PIL import Image
 from io import BytesIO
 
+# フォントをBase64形式で読み込む関数
 def load_font_as_base64(font_path):
     with open(font_path, "rb") as font_file:
         font_data = font_file.read()
     return base64.b64encode(font_data).decode("utf-8")
 
+# ページの初期化
 def init_page():
-    # フォントファイルをBase64形式に変換（同じディレクトリに配置）
-    font_base64 = load_font_as_base64("OtsutomeFont_Ver3_16.ttf")
-
     # ページ設定（UI非表示と背景黒設定を含む）
     st.set_page_config(page_title="自動画像セリフ生成", page_icon="🤖", layout="wide")
     st.markdown(
-        f"""
+        """
         <style>
-            @font-face {{
-                font-family: 'OtsutomeFont';
-                src: url(data:font/ttf;base64,{font_base64}) format('truetype');
-            }}
-
-            /* ヘッダー、ツールバー、フッターを非表示 */
-            [data-testid="stHeader"], [data-testid="stToolbar"], footer {{
+            /* ヘッダー、ツールバー、フッター非表示 */
+            [data-testid="stHeader"], [data-testid="stToolbar"], footer {
                 display: none;
-            }}
+            }
 
-            /* アプリ全体の背景を黒に設定 */
-            [data-testid="stAppViewContainer"] {{
+            /* アプリ全体の背景黒*/
+            [data-testid="stAppViewContainer"] {
                 background-color: black;
                 color: white;
-            }}
+            }
 
-            /* メインコンテナの背景も黒に設定 */
-            [data-testid="stMain"] {{
+            /* メインコンテナの背景黒*/
+            [data-testid="stMain"] {
                 background-color: black;
                 color: white;
-            }}
+            }
 
-            /* テキスト要素の色を白に設定 */
-            .stMarkdown, .stText {{
+            /* テキスト色を白*/
+            .stMarkdown, .stText {
                 color: white;
-            }}
-
-            /* テキストの中央揃え */
-            .centered-text {{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 70vh;
-                font-size: 2em; /* 任意のサイズに変更可能 */
-                text-align: center;
-                font-family: 'OtsutomeFont', sans-serif; /* OtsutomeFont を使用 */
-            }}
+            }
         </style>
-        """, 
+        """,
         unsafe_allow_html=True
     )
 
 def main():
     init_page()
+
+    # フォントファイルをBase64形式で読み込み
+    font_a_base64 = load_font_as_base64("font/OtsutomeFont_Ver3_16.ttf")  # 明るいとき
+    font_b_base64 = load_font_as_base64("font/NotoSansCJKjp-Regular.otf")  # 暗いとき
 
     llm = ChatOpenAI(
         temperature=0,
@@ -87,14 +74,14 @@ def main():
         st.session_state.captured_image.save(buffered, format="JPEG")
         image_base64 = base64.b64encode(buffered.getvalue()).decode()
 
-        # 自動的に画像内容を分析
-        query = [
+                # 1つ目のクエリ：画像の内容を分析
+        query1 = [
             (
                 "user",
                 [
                     {
                         "type": "text",
-                        "text": "この画像に写っている物が何かを推測し、それを擬人化したセリフのみを出力してください。それが難しいときは「セリフ生成不可能」と出力してください。人が写っている場合は「人間」が言いそうなセリフを出力してください。"
+                        "text": "この画像には何が写っていますか？単語で答えてください。"
                     },
                     {
                         "type": "image_url",
@@ -108,17 +95,93 @@ def main():
         ]
 
         try:
-            response = llm.invoke(query)
-            generated_text = response.content.strip()
+            response1 = llm.invoke(query1)
+            result1 = response1.content.strip()  # 1つ目のクエリの結果
         except Exception as e:
-            st.error(f"生成中にエラーが発生しました: {e}")
-            generated_text = "セリフ生成不可能"
+            st.error(f"1つ目の生成中にエラーが発生しました: {e}")
+            result1 = "不明"
 
-        # セリフを中央揃えで任意のフォントと大きさで表示
+        # 2つ目のクエリ：1つ目のクエリ結果を使用した質問
+        query2_text = f"'{result1}'を用いた物語を200字程度で考えなさい。出力は物語のみとすること。可能であればその状況にあった絵文字などを用いること。物語の雰囲気は明るい、悲しい、怖い、面白いからランダムで選んでください。"
+        query2 = [
+            (
+                "user",
+                [
+                    {
+                        "type": "text",
+                        "text": query2_text
+                    }
+                ]
+            )
+        ]
+
+        try:
+            response2 = llm.invoke(query2)
+            result2 = response2.content.strip()  # 2つ目のクエリの結果
+        except Exception as e:
+            st.error(f"2つ目の生成中にエラーが発生しました: {e}")
+            result2 = "result2 error"
+
+        # 3つ目のクエリ：2つ目のクエリ結果を使用した質問
+        query3_text = f"物語'{result2}'は暗いですが明るいですか。暗い か 明るい か 不明 で答えなさい。それ以外の文字や記号を出力してはいけません。"
+        query3 = [
+            (
+                "user",
+                [
+                    {
+                        "type": "text",
+                        "text": query3_text
+                    }
+                ]
+            )
+        ]
+
+        try:
+            response3 = llm.invoke(query3)
+            result3 = response3.content.strip()  # 2つ目のクエリの結果
+        except Exception as e:
+            st.error(f"2つ目の生成中にエラーが発生しました: {e}")
+            result3 = "result3 error"
+
+        # CSSを動的に生成
+        if result3 == "明るい":
+            font_base64 = font_a_base64
+        elif result3 == "暗い":
+            font_base64 = font_b_base64
+        else:
+            font_base64 = None  # デフォルトフォント使用
+
+        if font_base64:
+            st.markdown(
+                f"""
+                <style>
+                    @font-face {{
+                        font-family: 'DynamicFont';
+                        src: url(data:font/ttf;base64,{font_base64}) format('truetype');
+                    }}
+                    .dynamic-text {{
+                        font-family: 'DynamicFont', sans-serif;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 70vh; /* 高さを画面全体に設定 */
+                        font-size: 2em; /* 任意のサイズに変更可能 */
+                        text-align: center;
+                        line-height: 4.0;
+                    }}
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+            font_class = "dynamic-text"
+        else:
+            font_class = ""  # デフォルトフォント使用
+
+        # 結果を表示
         st.markdown(
             f"""
-            <div class="centered-text">
-                {generated_text}
+            <div class="{font_class}">
+                {result2}
             </div>
             """,
             unsafe_allow_html=True
