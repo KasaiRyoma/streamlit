@@ -22,7 +22,8 @@ def apply_font(font_base64, font_size, line_height):
             .dynamic-text {{
                 font-family: 'DynamicFont', sans-serif;
                 display: flex;
-                width: 100%;  /* 高さを画面全体に設定 */
+                width: 70vw;  /* 高さを画面全体に設定 */
+                height: 70vh;
                 align-items: center;
                 justify-content: center; 
                 font-size: {font_size};
