@@ -38,13 +38,7 @@ def init_page():
             }
 
 
-
-            /* メインコンテナの背景黒*/
-            [data-testid="stMain"] {
-                background-color: black;
-                color: white;
-            }
-            
+         
         </style>
         """,
         unsafe_allow_html=True
