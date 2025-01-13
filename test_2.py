@@ -271,11 +271,11 @@ def main():
 
         if sound_f == "オン" and mood == "明るい":
             audio_placeholder.empty()
-            time.sleep(0.2) #これがないと上手く再生されません
+            time.sleep(2.0) #これがないと上手く再生されません
             audio_placeholder.markdown(sound_a, unsafe_allow_html=True)
         elif sound_f == "オン" and mood == "暗い":
             audio_placeholder.empty()
-            time.sleep(0.7) 
+            time.sleep(0.5) 
             audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
         elif sound_f == "オン" and mood == "コメディ":
             audio_placeholder.empty()
