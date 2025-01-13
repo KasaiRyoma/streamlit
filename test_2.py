@@ -10,7 +10,8 @@ from io import BytesIO
 def load_font_as_base64(font_path):
     with open(font_path, "rb") as font_file:
         font_data = font_file.read()
-    return base64.b64encode(font_data).decode("utf-8")
+        font_base54 = base64.b64encode(font_file.read()).decode("utf-8")
+    return font_base64
 
 #音声を再生する関数
 def load_audio_as_base64(audio_path):
