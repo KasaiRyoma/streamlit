@@ -48,9 +48,10 @@ def init_page():
                 background-color: black;
                 color: white;
             }
-             /* サイドバーの背景色をネイビーに固定 */
+            
+            /* サイドバーの背景色をグレーに固定 */
             [data-testid="stSidebar"] {
-                background-color: #001f3f;
+                background-color: #333333; /* グレー */
                 color: white;
             }
 
