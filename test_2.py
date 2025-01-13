@@ -174,10 +174,6 @@ def main():
             unsafe_allow_html=True
         )
 
-        for i in range(1, 101):
-            time.sleep(0.03)  # 少しずつ進行を更新
-            
-
         if sound_f == "オン":
             audio_files = {
                 "明るい": "./audio/akarui.mp3",
