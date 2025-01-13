@@ -190,7 +190,7 @@ def main():
             font_size = "1.8em"
             line_height = "1.2"
         else:  # 200文字
-            font_size = "1.5em"
+            font_size = "1.7em"
             line_height = "1.0"
 
         # フォントを雰囲気に応じて選択
