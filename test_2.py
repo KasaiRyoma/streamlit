@@ -60,15 +60,6 @@ def init_page():
 
 def main():
     init_page()
-    
-    sound_a = load_audio_as_base64("./audio/akarui.mp3")
-    time.sleep(1.0)
-    sound_b = load_audio_as_base64("./audio/kurai.mp3")
-    time.sleep(1.0)
-    sound_c = load_audio_as_base64("./audio/omosiro.mp3")
-    time.sleep(1.0)
-    sound_d = load_audio_as_base64("./audio/horror.mp3")
-    time.sleep(1.0)
 
     llm = ChatOpenAI(
         temperature=0,
@@ -255,13 +246,13 @@ def main():
             audio_placeholder.empty()
             time.sleep(0.5) #これがないと上手く再生されません
             if mood == "明るい":
-                audio_placeholder.markdown(sound_a, unsafe_allow_html=True)
+                audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
             elif mood == "暗い":
-                audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
+                audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
             elif mood == "コメディ":
-                audio_placeholder.markdown(sound_c, unsafe_allow_html=True)
+                audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
-                audio_placeholder.markdown(sound_d, unsafe_allow_html=True)       
+                audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)       
 
 if __name__ == '__main__':
     main()
