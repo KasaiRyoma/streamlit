@@ -42,6 +42,7 @@ def init_page():
                 background-color: black;
                 color: white;
             }
+
             /* メインコンテナの背景黒*/
             [data-testid="stMain"] {
                 background-color: black;
@@ -52,8 +53,6 @@ def init_page():
             [data-testid="stSidebar"] {
                 color: initial;
             }
-
-         
         </style>
         """,
         unsafe_allow_html=True
@@ -91,7 +90,7 @@ def main():
 
     # 文字数選択
     text_length = st.sidebar.selectbox(
-        "文字数を選択してください", [50, 100, 150, 200, "ランダム"], index=1
+        "文字数", [50, 100, 150, 200, "ランダム"], index=1
     )
 
     if text_length == "ランダム":
@@ -99,11 +98,16 @@ def main():
 
     # 雰囲気選択
     mood = st.sidebar.selectbox(
-        "雰囲気を選択してください", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0
+        "雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0
     )
 
     if mood == "ランダム":
         mood = random.choice(["明るい", "暗い", "コメディ", "ホラー"])
+
+    # フォントサイズ
+    font_size = st.sidebar.selectbox(
+        "フォントサイズ", ["小", "中", "大"], index=1
+    )
 
     # 音声選択
     sound_f = st.sidebar.radio(
@@ -181,18 +185,45 @@ def main():
             result2 = "result2 error"
 
         # フォントサイズと行間を文字数に応じて調整
-        if text_length == 50:
-            font_size = "3em"
-            line_height = "1.5"
-        elif text_length == 100:
-            font_size = "2.5em"
-            line_height = "1.3"
-        elif text_length == 150:
-            font_size = "1.8em"
-            line_height = "1.2"
-        else:  # 200文字
-            font_size = "1.7em"
-            line_height = "1.0"
+        if font_size == "小":
+            if text_length == 50:
+                font_size = "3em"
+                line_height = "1.5"
+            elif text_length == 100:
+                font_size = "2.5em"
+                line_height = "2.0"
+            elif text_length == 150:
+                font_size = "2em"
+                line_height = "2.5"
+            else:  # 200文字
+                font_size = "1.5em"
+                line_height = "3.0"
+        elif font_size == "中":
+            if text_length == 50:
+                font_size = "3em"
+                line_height = "1.5"
+            elif text_length == 100:
+                font_size = "2.5em"
+                line_height = "2.0"
+            elif text_length == 150:
+                font_size = "2em"
+                line_height = "2.5"
+            else:  # 200文字
+                font_size = "1.5em"
+                line_height = "3.0"
+        else:
+            if text_length == 50:
+                font_size = "7.0em"
+                line_height = "1.5"
+            elif text_length == 100:
+                font_size = "5.3em"
+                line_height = "1.3"
+            elif text_length == 150:
+                font_size = "4.4em"
+                line_height = "1.0"
+            else:  # 200文字
+                font_size = "4.2em"
+                line_height = "1.0"
 
         # フォントを雰囲気に応じて選択
         if mood == "明るい":
@@ -214,12 +245,11 @@ def main():
                 }}
                 .dynamic-text {{
                     font-family: 'DynamicFont', sans-serif;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    display: flex; 
+
                     height: 70vh; /* 高さを画面全体に設定 */
+                    align-items: center;                                                
                     font-size: {font_size};
-                    text-align: center;
                     line-height: {line_height};
                 }}
             </style>
