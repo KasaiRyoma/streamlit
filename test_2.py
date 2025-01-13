@@ -50,7 +50,7 @@ def init_page():
         unsafe_allow_html=True
     )
 
-def invoke_llm(llm, text, image_base64=None):
+def invoke_llm(llm, text, image_base64):
     query = [
         (
             "user",
@@ -164,7 +164,7 @@ def main():
             "またこの画像の明るさや場所、時間帯についても単語で答えてください。"
             "単語以外の文章は絶対に出力しないでください。"
         )
-        result1 = invoke_llm(llm, query1_text, image_base64=image_base64)        
+        result1 = invoke_llm(llm, query1_text, image_base64)        
 
         query_templates = {
             "オン": (
