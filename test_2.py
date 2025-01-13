@@ -37,11 +37,7 @@ def init_page():
                 display: none;
             }
 
-            /* アプリ全体の背景黒*/
-            [data-testid="stAppViewContainer"] {
-                background-color: black;
-                color: white;
-            }
+
 
             /* メインコンテナの背景黒*/
             [data-testid="stMain"] {
