@@ -24,6 +24,7 @@ def apply_font(font_base64, font_size, line_height):
                 display: flex;
                 height: 70vh; /* 高さを画面全体に設定 */
                 align-items: center;
+                justify-content: center; 
                 font-size: {font_size};
                 line-height: {line_height};
             }}
