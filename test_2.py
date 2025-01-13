@@ -53,6 +53,13 @@ def init_page():
             .stMarkdown, .stText {
                 color: white;
             }
+        　　 /* サイドバーの背景色をネイビーに固定 */
+            [data-testid="stSidebar"] {
+                background-color: #001f3f;
+                color: white;
+            }
+
+
             /* サイドバーのスタイルはデフォルトのままにする */
             [data-testid="stSidebar"] {
                 background-color: inherit; /* 背景色は変更しない */
