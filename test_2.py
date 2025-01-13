@@ -7,6 +7,7 @@ from PIL import Image
 from io import BytesIO
 
 # フォントをBase64形式で読み込む関数
+@st.cache_data
 def load_font_as_base64(font_path):
     with open(font_path, "rb") as font_file:
         font_data = font_file.read()
