@@ -190,10 +190,10 @@ def main():
                 font_size = "3em"
                 line_height = "1.5"
             elif text_length == 100:
-                font_size = "2.9em"
+                font_size = "2.3em"
                 line_height = "1.3"
             elif text_length == 150:
-                font_size = "2.2em"
+                font_size = "2.0em"
                 line_height = "1.0"
             else:  # 200文字
                 font_size = "1.8em"
