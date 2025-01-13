@@ -200,10 +200,10 @@ def main():
                 line_height = "3.0"
         elif font_size == "中":
             if text_length == 50:
-                font_size = "3em"
+                font_size = "6.0em"
                 line_height = "1.5"
             elif text_length == 100:
-                font_size = "4.5em"
+                font_size = "4.3em"
                 line_height = "1.3"
             elif text_length == 150:
                 font_size = "3.7em"
