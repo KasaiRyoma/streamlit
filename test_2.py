@@ -174,7 +174,9 @@ def main():
             unsafe_allow_html=True
         )
 
-        time.sleep(5.0)
+        for i in range(1, 101):
+            time.sleep(0.03)  # 少しずつ進行を更新
+            progress_bar.progress(i)
 
         if sound_f == "オン":
             audio_files = {
