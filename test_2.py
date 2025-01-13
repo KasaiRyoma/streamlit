@@ -67,11 +67,6 @@ def main():
         max_tokens=512
     )
 
-    # セッションステートの初期化
-    if 'captured_image' not in st.session_state:
-        st.session_state.captured_image = None
-        st.session_state.response = None
-
     # サイドバー
     st.sidebar.header("オプション")
 
@@ -79,7 +74,6 @@ def main():
     text_length = st.sidebar.selectbox(
         "文字数", [50, 100, 150, 200, "ランダム"], index=1
     )
-
     if text_length == "ランダム":
         text_length = random.choice([50, 100, 150, 200])
 
@@ -87,7 +81,6 @@ def main():
     mood = st.sidebar.selectbox(
         "雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0
     )
-
     if mood == "ランダム":
         mood = random.choice(["明るい", "暗い", "コメディ", "ホラー"])
 
@@ -106,28 +99,27 @@ def main():
     )
     
     # カメラで画像撮影
-    st.sidebar.header("カメラで画像を撮影")
     camera_input = st.sidebar.camera_input("撮影してください")
 
     if camera_input:
         # 画像がアップロードされた場合
-        st.session_state.captured_image = Image.open(BytesIO(camera_input.getvalue()))
+        captured_image = Image.open(BytesIO(camera_input.getvalue()))
 
         # 画像をバイナリ形式に変換
         buffered = BytesIO()
-        st.session_state.captured_image.save(buffered, format="JPEG")
+        captured_image.save(buffered, format="JPEG")
         image_base64 = base64.b64encode(buffered.getvalue()).decode()
 
         # 1つ目のクエリ：画像の内容を分析
         
-        query1_txt =f"この画像には何が写っていますか？単語で答えてください。またこの画像の明るさや場所、時間帯についても単語で答えてください。"
+        query1_text =f"この画像には何が写っていますか？単語で答えてください。またこの画像の明るさや場所、時間帯についても単語で答えてください。単語以外の文章は絶対に出力しないでください。"
         query1 = [
             (
                 "user",
                 [
                     {
                         "type": "text",
-                        "text": query1_txt
+                        "text": query1_text
                     },
                     {
                         "type": "image_url",
@@ -140,12 +132,10 @@ def main():
             )
         ]
 
-        try:
-            response1 = llm.invoke(query1)
-            result1 = response1.content.strip()  # 1つ目のクエリの結果
-        except Exception as e:
-            st.error(f"1つ目の生成中にエラーが発生しました: {e}")
-            result1 = "不明"
+
+        response1 = llm.invoke(query1)
+        result1 = response1.content.strip()  # 1つ目のクエリの結果
+
 
         # 2つ目のクエリ：1つ目のクエリ結果を使用した質問
         if kana == "オン":
@@ -164,12 +154,8 @@ def main():
             )
         ]
 
-        try:
-            response2 = llm.invoke(query2)
-            result2 = response2.content.strip()  # 2つ目のクエリの結果
-        except Exception as e:
-            st.error(f"2つ目の生成中にエラーが発生しました: {e}")
-            result2 = "result2 error"
+        response2 = llm.invoke(query2)
+        result2 = response2.content.strip()  # 2つ目のクエリの結果
 
         # フォントサイズと行間を文字数に応じて調整
         if font_size == "小":
@@ -214,17 +200,13 @@ def main():
 
         # フォントを雰囲気に応じて選択
         if mood == "明るい":
-            font_a_base64 = load_font_as_base64("./font/001Shirokuma-Regular.otf")
-            font_base64 = font_a_base64
+            font_base64 = load_font_as_base64("./font/001Shirokuma-Regular.otf")
         elif mood == "暗い":
-            font_b_base64 = load_font_as_base64("./font/OtsutomeFont_Ver3_16.ttf")
-            font_base64 = font_b_base64
+            font_base64 = load_font_as_base64("./font/OtsutomeFont_Ver3_16.ttf")
         elif mood == "コメディ":
-            font_c_base64 = load_font_as_base64("./font/pugnomincho-mini.otf") 
-            font_base64 = font_c_base64
+            font_base64 = load_font_as_base64("./font/pugnomincho-mini.otf")
         else:  # ホラー
-            font_d_base64 = load_font_as_base64("./font/ibaraji04.ttf")
-            font_base64 = font_d_base64
+            font_base64 = load_font_as_base64("./font/ibaraji04.ttf")
 
         # CSSを動的に生成
         st.markdown(
@@ -264,17 +246,13 @@ def main():
             audio_placeholder.empty()
             time.sleep(0.5) #これがないと上手く再生されません
             if mood == "明るい":
-                sound_a = load_audio_as_base64("./audio/akarui.mp3")
-                audio_placeholder.markdown(sound_a, unsafe_allow_html=True)
+                audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
             elif mood == "暗い":
-                sound_b = load_audio_as_base64("./audio/kurai.mp3")
-                audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
+                audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
             elif mood == "コメディ":
-                sound_c = load_audio_as_base64("./audio/omosiro.mp3")
-                audio_placeholder.markdown(sound_c, unsafe_allow_html=True)
+                audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
-                sound_d = load_audio_as_base64("./audio/horror.mp3")
-                audio_placeholder.markdown(sound_d, unsafe_allow_html=True)       
+                audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)       
 
 if __name__ == '__main__':
     main()
