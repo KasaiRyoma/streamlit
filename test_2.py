@@ -13,6 +13,7 @@ def load_font_as_base64(font_path):
     return base64.b64encode(font_data).decode("utf-8")
 
 #音声を再生する関数
+@st.cache_data
 def load_audio_as_base64(audio_path):
     with open(audio_path, "rb") as audio_file:
         audio_base64 = base64.b64encode(audio_file.read()).decode()
