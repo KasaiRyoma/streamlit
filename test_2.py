@@ -13,7 +13,6 @@ def load_font_as_base64(font_path):
     return base64.b64encode(font_data).decode("utf-8")
 
 #音声を再生する関数
-@st.cache_data
 def load_audio_as_base64(audio_path):
     with open(audio_path, "rb") as audio_file:
         audio_base64 = base64.b64encode(audio_file.read()).decode()
@@ -63,8 +62,11 @@ def main():
     init_page()
     
     sound_a = load_audio_as_base64("./audio/akarui.mp3")
+    time.sleep(1.0)
     sound_b = load_audio_as_base64("./audio/kurai.mp3")
+    time.sleep(1.0)
     sound_c = load_audio_as_base64("./audio/omosiro.mp3")
+    time.sleep(1.0)
     sound_d = load_audio_as_base64("./audio/horror.mp3")
     time.sleep(1.0)
 
