@@ -50,7 +50,7 @@ def init_page():
         unsafe_allow_html=True
     )
 
-def invoke_llm(llm, text, image_base64):
+def invoke_llm(llm, text, image_base64=none):
     query = [
         (
             "user",
