@@ -53,6 +53,16 @@ def init_page():
             .stMarkdown, .stText {
                 color: white;
             }
+            /* サイドバーのスタイルはデフォルトのままにする */
+            [data-testid="stSidebar"] {
+                background-color: inherit; /* 背景色は変更しない */
+                color: inherit; /* テキスト色は変更しない */
+            }
+    
+            /* サイドバーの中のテキスト色 */
+            [data-testid="stSidebar"] .stMarkdown, [data-testid="stSidebar"] .stText {
+                color: initial; /* 初期状態の色を使用 */
+            }            
         </style>
         """,
         unsafe_allow_html=True
