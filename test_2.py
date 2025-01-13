@@ -284,5 +284,8 @@ def main():
             sound_d = load_audio_as_base64("./audio/horror.mp3")
             audio_placeholder.markdown(sound_d, unsafe_allow_html=True)   
 
+        audio_placeholder.empty()
+        time.sleep(3.0) 
+
 if __name__ == '__main__':
     main()
