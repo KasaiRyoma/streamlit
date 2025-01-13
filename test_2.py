@@ -6,13 +6,12 @@ from langchain_openai import ChatOpenAI
 from PIL import Image
 from io import BytesIO
 
-# フォントをBase64形式で読み込む関数
+
 def load_font_as_base64(font_path):
     with open(font_path, "rb") as font_file:
         font_base64 = base64.b64encode(font_file.read()).decode("utf-8")
     return font_base64
 
-#音声を再生する関数
 def load_audio_as_base64(audio_path):
     with open(audio_path, "rb") as audio_file:
         audio_base64 = base64.b64encode(audio_file.read()).decode()
@@ -21,12 +20,9 @@ def load_audio_as_base64(audio_path):
             <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
         </audio>
         """
-        return audio_html
+    return audio_html
 
-
-# ページの初期化
 def init_page():
-    # ページ設定（UI非表示と背景黒設定を含む）
     st.set_page_config(page_title="自動画像セリフ生成", page_icon="🤖", layout="wide")
     st.markdown(
         """
@@ -35,19 +31,16 @@ def init_page():
             [data-testid="stHeader"], [data-testid="stToolbar"], footer {
                 display: none;
             }
-
             /* アプリ全体の背景黒*/
             [data-testid="stAppViewContainer"] {
                 background-color: black;
                 color: white;
             }
-
             /* メインコンテナの背景黒*/
             [data-testid="stMain"] {
                 background-color: black;
                 color: white;
             }
-
             /* サイドバーの背景色と文字色を初期状態に戻す */
             [data-testid="stSidebar"] {
                 color: initial;
@@ -58,17 +51,6 @@ def init_page():
     )
 
 def invoke_llm(llm, text, image_base64=None):
-    """
-    LLMにクエリを送信し、結果を取得する汎用関数。
-
-    Args:
-        llm: LLMインスタンス
-        text (str): クエリのテキスト
-        image_base64 (str, optional): 画像データのBase64文字列。デフォルトはNone。
-
-    Returns:
-        str: LLMからの応答の文字列（トリム済み）
-    """
     query = [
         (
             "user",
@@ -92,6 +74,34 @@ def invoke_llm(llm, text, image_base64=None):
     response = llm.invoke(query)
     return response.content.strip()
 
+def apply_font(font_base64, font_size, line_height):
+    """
+    カスタムフォントスタイルを適用する関数。
+
+    Args:
+        font_base64 (str): Base64エンコードされたフォントデータ。
+        font_size (str): CSSで指定するフォントサイズ（例: "2.5em"）。
+        line_height (str): CSSで指定する行間（例: "1.5"）。
+    """
+    st.markdown(
+        f"""
+        <style>
+            @font-face {{
+                font-family: 'DynamicFont';
+                src: url(data:font/ttf;base64,{font_base64}) format('truetype');
+            }}
+            .dynamic-text {{
+                font-family: 'DynamicFont', sans-serif;
+                display: flex;
+                height: 70vh; /* 高さを画面全体に設定 */
+                align-items: center;
+                font-size: {font_size};
+                line-height: {line_height};
+            }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 def main():
     init_page()
@@ -176,7 +186,6 @@ def main():
 
         query2_text = query_templates[kana]
         result2 = invoke_llm(llm, query2_text)   
-       
 
         font_settings = {
             "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
@@ -184,7 +193,6 @@ def main():
             "大": {50: ("7.0em", "1.5"), 100: ("5.3em", "1.3"), 150: ("4.4em", "1.0"), 200: ("4.2em", "1.0")},
         }
         font_size, line_height = font_settings[font_size][text_length]
-                
 
         font_paths = {
             "明るい": "./font/001Shirokuma-Regular.otf",
@@ -192,30 +200,8 @@ def main():
             "コメディ": "./font/pugnomincho-mini.otf",
             "ホラー": "./font/ibaraji04.ttf",
         }
-        font_base64 = load_font_as_base64(font_paths[mood])
 
-
-        # CSSを動的に生成
-        st.markdown(
-            f"""
-            <style>
-                @font-face {{
-                    font-family: 'DynamicFont';
-                    src: url(data:font/ttf;base64,{font_base64}) format('truetype');
-                }}
-                .dynamic-text {{
-                    font-family: 'DynamicFont', sans-serif;
-                    display: flex; 
-
-                    height: 70vh; /* 高さを画面全体に設定 */
-                    align-items: center;                                                
-                    font-size: {font_size};
-                    line-height: {line_height};
-                }}
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
+        apply_font(load_font_as_base64(font_paths[mood]), font_size, line_height)
 
         # 結果を表示
         st.markdown(
