@@ -60,7 +60,10 @@ def init_page():
 
 def main():
     init_page()
-
+    
+    audio_placeholder = st.empty()
+    audio_placeholder.empty()
+    
     llm = ChatOpenAI(
         temperature=0,
         model="gpt-4o",
@@ -242,8 +245,7 @@ def main():
 
         
         if sound_f == "オン":
-            audio_placeholder = st.empty()
-            audio_placeholder.empty()
+
             time.sleep(0.5) #これがないと上手く再生されません
             if mood == "明るい":
                 
