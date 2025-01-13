@@ -62,16 +62,17 @@ def main():
     init_page()
 
     # フォントファイルをBase64形式で読み込み
-    font_a_base64 = load_font_as_base64("./font/001Shirokuma-Regular.otf")  # 明るいとき
-    font_b_base64 = load_font_as_base64("./font/OtsutomeFont_Ver3_16.ttf")  # 暗いとき
-    font_c_base64 = load_font_as_base64("./font/pugnomincho-mini.otf")  # オプション3
-    font_d_base64 = load_font_as_base64("./font/ibaraji04.ttf")  # オプション4
+if "font_a_base64" not in st.session_state:
+    st.session_state.font_a_base64 = load_font_as_base64("./font/001Shirokuma-Regular.otf")
+    st.session_state.font_b_base64 = load_font_as_base64("./font/OtsutomeFont_Ver3_16.ttf")
+    st.session_state.font_c_base64 = load_font_as_base64("./font/pugnomincho-mini.otf")
+    st.session_state.font_d_base64 = load_font_as_base64("./font/ibaraji04.ttf")
 
-    audio_placeholder = st.empty()
-    sound_a = load_audio_as_base64("./audio/akarui.mp3")
-    sound_b = load_audio_as_base64("./audio/kurai.mp3")
-    sound_c = load_audio_as_base64("./audio/omosiro.mp3")
-    sound_d = load_audio_as_base64("./audio/horror.mp3")
+if "sound_a" not in st.session_state:
+    st.session_state.sound_a = load_audio_as_base64("./audio/akarui.mp3")
+    st.session_state.sound_b = load_audio_as_base64("./audio/kurai.mp3")
+    st.session_state.sound_c = load_audio_as_base64("./audio/omosiro.mp3")
+    st.session_state.sound_d = load_audio_as_base64("./audio/horror.mp3")
 
    
 
@@ -228,13 +229,13 @@ def main():
 
         # フォントを雰囲気に応じて選択
         if mood == "明るい":
-            font_base64 = font_a_base64
+            font_base64 = st.session_state.font_a_base64
         elif mood == "暗い":
-            font_base64 = font_b_base64
+            font_base64 = st.session_state.font_b_base64
         elif mood == "コメディ":
-            font_base64 = font_c_base64
+            font_base64 = st.session_state.font_c_base64
         else:  # ホラー
-            font_base64 = font_d_base64
+            font_base64 = st.session_state.font_d_base64
 
         # CSSを動的に生成
         st.markdown(
@@ -273,13 +274,13 @@ def main():
         time.sleep(0.5) #これがないと上手く再生されません
         
         if sound_f == "オン" and mood == "明るい":
-            audio_placeholder.markdown(sound_a, unsafe_allow_html=True)
+            audio_placeholder.markdown(st.session_state.sound_a, unsafe_allow_html=True)
         elif sound_f == "オン" and mood == "暗い":
-            audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
+            audio_placeholder.markdown(st.session_state.sound_b, unsafe_allow_html=True)     
         elif sound_f == "オン" and mood == "コメディ":
-            audio_placeholder.markdown(sound_c, unsafe_allow_html=True)
+            audio_placeholder.markdown(st.session_state.sound_c, unsafe_allow_html=True)
         elif sound_f == "オン" and mood == "ホラー":
-            audio_placeholder.markdown(sound_d, unsafe_allow_html=True)       
+            audio_placeholder.markdown(st.session_state.sound_d, unsafe_allow_html=True)       
 
 if __name__ == '__main__':
     main()
