@@ -252,7 +252,6 @@ def main():
                 audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
                 audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)  
-        time.sleep(10.0)
 
 
 if __name__ == '__main__':
