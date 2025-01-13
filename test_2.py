@@ -62,10 +62,10 @@ def init_page():
 def main():
     init_page()
     
-    st.session_state.sound_a = load_audio_as_base64("./audio/akarui.mp3")
-    st.session_state.sound_b = load_audio_as_base64("./audio/kurai.mp3")
-    st.session_state.sound_c = load_audio_as_base64("./audio/omosiro.mp3")
-    st.session_state.sound_d = load_audio_as_base64("./audio/horror.mp3")
+    sound_a = load_audio_as_base64("./audio/akarui.mp3")
+    sound_b = load_audio_as_base64("./audio/kurai.mp3")
+    sound_c = load_audio_as_base64("./audio/omosiro.mp3")
+    sound_d = load_audio_as_base64("./audio/horror.mp3")
     time.sleep(1.0)
 
     llm = ChatOpenAI(
