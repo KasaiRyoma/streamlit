@@ -182,16 +182,16 @@ def main():
         # フォントサイズと行間を文字数に応じて調整
         if text_length == 50:
             font_size = "3em"
-            line_height = "1.5"
+            line_height = "3.5"
         elif text_length == 100:
             font_size = "2.5em"
             line_height = "2.0"
         elif text_length == 150:
             font_size = "2em"
-            line_height = "2.5"
+            line_height = "1.5"
         else:  # 200文字
             font_size = "1.5em"
-            line_height = "3.0"
+            line_height = "1.0"
 
         # フォントを雰囲気に応じて選択
         if mood == "明るい":
