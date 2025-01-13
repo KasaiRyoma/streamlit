@@ -267,24 +267,24 @@ def main():
             unsafe_allow_html=True
         )
 
-        #audio_placeholder = st.empty()
+        audio_placeholder = st.empty()
 
         if sound_f == "オン" and mood == "明るい":
             #audio_placeholder.empty()
             time.sleep(0.5) #これがないと上手く再生されません
-            st.markdown(sound_a, unsafe_allow_html=True)
+            audio_placeholder.markdown(sound_a, unsafe_allow_html=True)
         elif sound_f == "オン" and mood == "暗い":
             #audio_placeholder.empty()
             time.sleep(0.5) 
-            st.markdown(sound_b, unsafe_allow_html=True)     
+            audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
         elif sound_f == "オン" and mood == "コメディ":
             #audio_placeholder.empty()
             time.sleep(0.5) 
-            st.markdown(sound_c, unsafe_allow_html=True)
+            audio_placeholder.markdown(sound_c, unsafe_allow_html=True)
         elif sound_f == "オン" and mood == "ホラー":
             #audio_placeholder.empty()
             time.sleep(0.5) 
-            st.markdown(sound_d, unsafe_allow_html=True)       
+            audio_placeholder.markdown(sound_d, unsafe_allow_html=True)       
 
 if __name__ == '__main__':
     main()
