@@ -18,7 +18,7 @@ def load_audio_as_base64(audio_path):
         audio_base64 = base64.b64encode(audio_file.read()).decode()
         audio_html = f"""
         <audio autoplay=True>
-            <source src="data:audio/ogg;base64,{audio_base64}" type="audio/ogg">
+            <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
         """
