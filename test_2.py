@@ -6,7 +6,6 @@ from langchain_openai import ChatOpenAI
 from PIL import Image
 from io import BytesIO
 
-
 def load_font_base64(font_path):
     with open(font_path, "rb") as font_file:
         font_base64 = base64.b64encode(font_file.read()).decode("utf-8")
@@ -43,10 +42,8 @@ def load_audio_base64(audio_path):
         """
     return audio_html
 
-def image_convert(camera_input):
-
+def image_base64(camera_input):
     captured_image = Image.open(BytesIO(camera_input.getvalue()))
-    # 画像をバイナリ形式に変換
     buffered = BytesIO()
     captured_image.save(buffered, format="JPEG")
     image_base64 = base64.b64encode(buffered.getvalue()).decode()
@@ -100,7 +97,6 @@ def chatgpt(llm, text, image_base64=None):
     response = llm.invoke(query)
     return response.content.strip()
 
-
 def main():
     init_page()
     audio_placeholder = st.empty()
@@ -112,31 +108,19 @@ def main():
         max_tokens=512
     )
 
-    st.sidebar.header("オプション")
-
-    text_length = st.sidebar.selectbox(
-        "文字数", [50, 100, 150, 200, "ランダム"], index=1
-    )
+    text_length = st.sidebar.selectbox("文字数", [50, 100, 150, 200, "ランダム"], index=1)
     if text_length == "ランダム":
         text_length = random.choice([50, 100, 150, 200])
 
-    mood = st.sidebar.selectbox(
-        "雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0
-    )
+    mood = st.sidebar.selectbox("雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0)
     if mood == "ランダム":
         mood = random.choice(["明るい", "暗い", "コメディ", "ホラー"])
 
-    font_size = st.sidebar.selectbox(
-        "フォントサイズ", ["小", "中", "大"], index=1
-    )
+    font_size = st.sidebar.selectbox("フォントサイズ", ["小", "中", "大"], index=1)
 
-    sound_f = st.sidebar.radio(
-        "効果音", ["オン", "オフ"], index=1
-    )
+    sound_f = st.sidebar.radio("効果音", ["オン", "オフ"], index=1)
 
-    kana = st.sidebar.radio(
-    "ひらがなモード", ["オン", "オフ"], index=1
-    )
+    kana = st.sidebar.radio("ひらがなモード", ["オン", "オフ"], index=1)
     
     camera_input = st.sidebar.camera_input("撮影してください")
 
@@ -146,44 +130,40 @@ def main():
             "またこの画像の明るさや場所、時間帯についても単語で答えてください。"
             "単語以外の文章は絶対に出力しないでください。"
         )
-        result1 = chatgpt(llm, query1_text, image_convert(camera_input))        
+        result1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
-        query_templates = {
+        query2_text = {
             "オン": (
-                f"'{result1}'を用いた物語を{text_length}字程度で考えなさい。"
-                f"出力は物語のみとすること。"
+                f"'{result1}'を用いた文章を{text_length}字程度で考えなさい。"
+                f"出力は文章文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
                 f"'{result1}'以外のものはできるだけ話に登場させないこと。"
-                f"物語の雰囲気は{mood}にしてください。"
+                f"文章文章の雰囲気は{mood}にしてください。"
                 f"漢字は使わずにすべてひらがなで出力してください。"
             ),
             "オフ": (
-                f"'{result1}'を用いた物語を{text_length}字程度で考えなさい。"
-                f"出力は物語のみとすること。"
+                f"'{result1}'を用いた文章文章を{text_length}字程度で考えなさい。"
+                f"出力は文章文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
                 f"'{result1}'以外のものはできるだけ話に登場させないこと。"
-                f"物語の雰囲気は{mood}にしてください。"
+                f"文章の雰囲気は{mood}にしてください。"
             ),
         }
 
-        query2_text = query_templates[kana]
-        result2 = chatgpt(llm, query2_text)   
+        result2 = chatgpt(llm, query2_text[kana])   
 
-        font_settings = {
-            "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
-            "中": {50: ("6.0em", "1.5"), 100: ("4.3em", "1.3"), 150: ("3.7em", "1.0"), 200: ("3.5em", "1.0")},
-            "大": {50: ("7.0em", "1.5"), 100: ("5.3em", "1.3"), 150: ("4.4em", "1.0"), 200: ("4.2em", "1.0")},
-        }
-        #font_size, line_height = font_settings[font_size][text_length]
-
-        font_paths = {
+        font_path = {
             "明るい": "./font/001Shirokuma-Regular.otf",
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
             "コメディ": "./font/pugnomincho-mini.otf",
             "ホラー": "./font/ibaraji04.ttf",
         }
-
-        apply_font(load_font_base64(font_paths[mood]), *font_settings[font_size][text_length])
+        font_settings = {
+            "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
+            "中": {50: ("6.0em", "1.5"), 100: ("4.3em", "1.3"), 150: ("3.7em", "1.0"), 200: ("3.5em", "1.0")},
+            "大": {50: ("7.0em", "1.5"), 100: ("5.3em", "1.3"), 150: ("4.4em", "1.0"), 200: ("4.2em", "1.0")},
+        }
+        apply_font(load_font_base64(font_path[mood]), *font_settings[font_size][text_length])
 
         st.markdown(
             f"""
