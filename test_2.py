@@ -168,7 +168,7 @@ def main():
                 audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
                 audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)  
-        time.sleep(1.0)
+        time.sleep(10.0)
 
         # フォントサイズと行間を文字数に応じて調整
         if font_size == "小":
