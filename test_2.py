@@ -243,7 +243,7 @@ def main():
         if sound_f == "オン":
             audio_placeholder = st.empty()
             audio_placeholder.empty()
-            #time.sleep(0.5) #これがないと上手く再生されません
+            time.sleep(0.5) #これがないと上手く再生されません
             if mood == "明るい":
                 
                 audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
