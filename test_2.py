@@ -187,7 +187,7 @@ def main():
         # フォントサイズと行間を文字数に応じて調整
         if font_size == "小":
             if text_length == 50:
-                font_size = "3em"
+                font_size = "2.9em"
                 line_height = "1.5"
             elif text_length == 100:
                 font_size = "2.3em"
