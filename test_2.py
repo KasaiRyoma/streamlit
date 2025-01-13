@@ -267,7 +267,7 @@ def main():
             unsafe_allow_html=True
         )
 
-        audio_placeholder = st.empty()
+        #audio_placeholder = st.empty()
 
         if sound_f == "オン" and mood == "明るい":
             #audio_placeholder.empty()
