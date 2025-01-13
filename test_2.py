@@ -156,6 +156,18 @@ def main():
 
         response2 = llm.invoke(query2)
         result2 = response2.content.strip()  # 2つ目のクエリの結果
+        if sound_f == "オン":
+            audio_placeholder = st.empty()
+            audio_placeholder.empty()
+            time.sleep(0.5) #これがないと上手く再生されません
+            if mood == "明るい":
+                audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
+            elif mood == "暗い":
+                audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
+            elif mood == "コメディ":
+                audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
+            elif mood == "ホラー":
+                audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)  
 
         # フォントサイズと行間を文字数に応じて調整
         if font_size == "小":
@@ -230,18 +242,6 @@ def main():
             unsafe_allow_html=True
         )
 
-        if sound_f == "オン":
-            audio_placeholder = st.empty()
-            audio_placeholder.empty()
-            time.sleep(0.5) #これがないと上手く再生されません
-            if mood == "明るい":
-                audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
-            elif mood == "暗い":
-                audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
-            elif mood == "コメディ":
-                audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
-            elif mood == "ホラー":
-                audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)  
         # 結果を表示
         st.markdown(
             f"""
