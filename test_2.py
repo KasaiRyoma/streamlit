@@ -49,20 +49,6 @@ def init_page():
                 color: white;
             }
             
-            /* テキスト色を白*/
-            .stMarkdown, .stText {
-                color: white;
-            }
-        　　 /* サイドバーの背景色と文字色を初期状態に戻す */
-            [data-testid="stSidebar"] {
-                background-color: initial;
-                color: Gray;
-            }
-    
-            /* サイドバー内のテキストスタイルを初期状態に戻す */
-            [data-testid="stSidebar"] .stMarkdown, [data-testid="stSidebar"] .stText {
-                color: Balck;
-            }
         </style>
         """,
         unsafe_allow_html=True
