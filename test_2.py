@@ -266,10 +266,9 @@ def main():
             """,
             unsafe_allow_html=True
         )
-        time.sleep(1.5) 
         
         audio_placeholder = st.empty()
-
+        time.sleep(0.5) 
         if sound_f == "オン" and mood == "明るい":
             audio_placeholder.empty()
             time.sleep(0.5) #これがないと上手く再生されません
@@ -285,7 +284,8 @@ def main():
         elif sound_f == "オン" and mood == "ホラー":
             audio_placeholder.empty()
             time.sleep(0.5) 
-            audio_placeholder.markdown(sound_d, unsafe_allow_html=True)       
+            audio_placeholder.markdown(sound_d, unsafe_allow_html=True)   
+         time.sleep(2.5) 
 
 if __name__ == '__main__':
     main()
