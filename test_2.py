@@ -17,7 +17,7 @@ def load_audio_as_base64(audio_path):
     with open(audio_path, "rb") as audio_file:
         audio_base64 = base64.b64encode(audio_file.read()).decode()
         audio_html = f"""
-        <audio autoplay playsinline preload="auto">
+        <audio autoplay=True>
             <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
         </audio>
         """
