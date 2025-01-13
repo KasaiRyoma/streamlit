@@ -48,12 +48,12 @@ def init_page():
                 color: white;
             }
 
-    
-            /* サイドバー内のテキストスタイルを初期状態に戻す */
-            [data-testid="stSidebar"] .stMarkdown, [data-testid="stSidebar"] .stText {
+                                /* サイドバーの背景色と文字色を初期状態に戻す */
+            [data-testid="stSidebar"] {
+                
                 color: initial;
             }
-                
+
          
         </style>
         """,
