@@ -174,7 +174,7 @@ def main():
             unsafe_allow_html=True
         )
 
-        time.sleep(2.0)
+        time.sleep(5.0)
 
         if sound_f == "オン":
             audio_files = {
