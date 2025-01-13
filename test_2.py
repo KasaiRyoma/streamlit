@@ -243,18 +243,18 @@ def main():
         if sound_f == "オン":
             audio_placeholder = st.empty()
             audio_placeholder.empty()
-            time.sleep(0.5) #これがないと上手く再生されません
+            #time.sleep(0.5) #これがないと上手く再生されません
             if mood == "明るい":
-                time.sleep(1)  
+                
                 audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
             elif mood == "暗い":
-                time.sleep(1)  
+                
                 audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
             elif mood == "コメディ":
-                time.sleep(1)  
+            
                 audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
-                time.sleep(1)  
+                
                 audio_placeholder.markdown(load_audio_as_base64("./audio/horror.mp3"), unsafe_allow_html=True)       
 
 if __name__ == '__main__':
