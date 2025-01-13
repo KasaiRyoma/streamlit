@@ -248,7 +248,9 @@ def main():
             if mood == "明るい":
                 audio_placeholder.markdown(load_audio_as_base64("./audio/akarui.mp3"), unsafe_allow_html=True)
             elif mood == "暗い":
-                audio_placeholder.markdown(load_audio_as_base64("./audio/kurai.mp3"), unsafe_allow_html=True)     
+                sound_b = load_audio_as_base64("./audio/kurai.mp3")
+                time.sleep(3.0) 
+                audio_placeholder.markdown(sound_b, unsafe_allow_html=True)     
             elif mood == "コメディ":
                 audio_placeholder.markdown(load_audio_as_base64("./audio/omosiro.mp3"), unsafe_allow_html=True)
             elif mood == "ホラー":
