@@ -22,7 +22,7 @@ def apply_font(font_base64, font_size, line_height):
             .dynamic-text {{
                 font-family: 'DynamicFont', sans-serif;
                 display: flex;
-                height: 70vh;
+                height: 70vh; /* 高さを画面全体に設定 */
                 align-items: center;
                 justify-content: center; 
                 font-size: {font_size};
@@ -176,13 +176,13 @@ def main():
         )
 
         if sound_f == "オン":
-            audio_files = {
+            audio_path = {
                 "明るい": "./audio/akarui.mp3",
                 "暗い": "./audio/kurai.mp3",
                 "コメディ": "./audio/omosiro.mp3",
                 "ホラー": "./audio/horror.mp3",
             }
-            audio_placeholder.markdown(load_audio_base64(audio_files[mood]), unsafe_allow_html=True)
+            audio_placeholder.markdown(load_audio_base64(audio_path[mood]), unsafe_allow_html=True)
      
 if __name__ == '__main__':
     main()
