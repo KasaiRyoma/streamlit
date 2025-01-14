@@ -8,7 +8,7 @@ from io import BytesIO
 
 def load_font_base64(font_path):
     with open(font_path, "rb") as font_file:
-        font_base64 = base64.b64encode(font_file.read()).decode("utf-8")
+        font_base64 = base64.b64encode(font_file.read()).decode()
     return font_base64
 
 def apply_font(font_base64, font_size, line_height):
