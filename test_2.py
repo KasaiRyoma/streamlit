@@ -95,8 +95,8 @@ def chatgpt(llm, text, image_base64=None):
                 "detail": "auto"
             }
         })
-    response = llm.invoke(query)
-    return response.content.strip()
+    response = llm.invoke(query).content.strip()
+    return response
 
 def main():
     init_page()
@@ -131,27 +131,27 @@ def main():
             "またこの画像の明るさや場所、時間帯についても単語で答えてください。"
             "単語以外の文章は絶対に出力しないでください。"
         )
-        result1 = chatgpt(llm, query1_text, image_base64(camera_input))        
+        response1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
         query2_text = {
             "オン": (
-                f"'{result1}'を用いた文章を{text_length}字程度で考えなさい。"
+                f"'{response1}'を用いた文章を{text_length}字程度で考えなさい。"
                 f"出力は文章文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
-                f"'{result1}'以外のものはできるだけ話に登場させないこと。"
+                f"'{response1}'以外のものはできるだけ話に登場させないこと。"
                 f"文章文章の雰囲気は{mood}にしてください。"
                 f"漢字は使わずにすべてひらがなで出力してください。"
             ),
             "オフ": (
-                f"'{result1}'を用いた文章文章を{text_length}字程度で考えなさい。"
+                f"'{response1}'を用いた文章文章を{text_length}字程度で考えなさい。"
                 f"出力は文章文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
-                f"'{result1}'以外のものはできるだけ話に登場させないこと。"
+                f"'{response1}'以外のものはできるだけ話に登場させないこと。"
                 f"文章の雰囲気は{mood}にしてください。"
             ),
         }
 
-        result2 = chatgpt(llm, query2_text[kana])   
+        response2 = chatgpt(llm, query2_text[kana])   
 
         font_path = {
             "明るい": "./font/001Shirokuma-Regular.otf",
@@ -169,7 +169,7 @@ def main():
         st.markdown(
             f"""
             <div class="dynamic-text">
-                {result2}
+                {response2}
             </div>
             """,
             unsafe_allow_html=True
