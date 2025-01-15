@@ -135,6 +135,7 @@ def main():
             query1_text = (
                 "この画像には何が写っていますか？単語で答えてください。"
                 "単語以外の文章は絶対に出力しないでください。"
+                "複数こたえられるときは複数こたえてください。"
             )
         response1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
