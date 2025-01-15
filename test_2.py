@@ -180,7 +180,7 @@ def main():
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
             "コメディ": "./font/PopRumCute.otf",
             "ホラー": "./font/onryou.TTF",
-            "雑学": "./font/Corporate-Logo-Rounded-Bold-ver3.otf"
+            "雑学": "./font/komorebi-gothic.ttf"
         }
         font_settings = {
             "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
