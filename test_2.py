@@ -189,16 +189,24 @@ def main():
             "大": {50: ("7.0em", "1.5"), 100: ("5.3em", "1.3"), 150: ("4.4em", "1.0"), 200: ("4.2em", "1.0")},
         }
         apply_font(load_font_base64(font_path[mood]), *font_settings[font_size][text_length])
-
-        st.markdown(
-            f"""
-            <div class="dynamic-text">
-                {response1}
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
+        if response1 == "不明":
+            st.markdown(
+                f"""
+                <div class="dynamic-text">
+                    {"画像が読み込めません"}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                f"""
+                <div class="dynamic-text">
+                    {response1}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
         if sound_f == "オン":
             audio_path = {
                 "明るい": "./audio/akarui.mp3",
