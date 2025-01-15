@@ -113,9 +113,9 @@ def main():
     if text_length == "ランダム":
         text_length = random.choice([50, 100, 150, 200])
 
-    mood = st.sidebar.selectbox("雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "ランダム", ], index=0)
+    mood = st.sidebar.selectbox("雰囲気", ["明るい", "暗い", "コメディ", "ホラー", "雑学", "ランダム", ], index=0)
     if mood == "ランダム":
-        mood = random.choice(["明るい", "暗い", "コメディ", "ホラー"])
+        mood = random.choice(["明るい", "暗い", "コメディ", "ホラー", "雑学"])
 
     font_size = st.sidebar.selectbox("フォントサイズ", ["小", "中", "大"], index=1)
 
@@ -128,23 +128,23 @@ def main():
     if camera_input:
         query1_text = (
             "この画像には何が写っていますか？単語で答えてください。"
-            "またこの画像の場所、時間帯、雰囲気についても単語で答えてください。"
-            "画像について詳しく説明できない場合は画像の明るさを判定して明るいか暗いのどちらかの単語で出力してください。"
+            "またこの画像の明るさや場所、時間帯についても単語で答えてください。"
+            "単語以外の文章は絶対に出力しないでください。"
         )
         response1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
         query2_text = {
             "オン": (
                 f"'{response1}'を用いた文章を{text_length}字程度で考えなさい。"
-                f"出力は文章文章のみとすること。"
+                f"出力は文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
                 f"'{response1}'以外のものはできるだけ話に登場させないこと。"
-                f"文章文章の雰囲気は{mood}にしてください。"
+                f"文章の雰囲気は{mood}にしてください。"
                 f"漢字は使わずにすべてひらがなで出力してください。"
             ),
             "オフ": (
-                f"'{response1}'を用いた文章文章を{text_length}字程度で考えなさい。"
-                f"出力は文章文章のみとすること。"
+                f"'{response1}'を用いた文章を{text_length}字程度で考えなさい。"
+                f"出力は文章のみとすること。"
                 f"可能であればその状況にあった絵文字などを用いること。"
                 f"'{response1}'以外のものはできるだけ話に登場させないこと。"
                 f"文章の雰囲気は{mood}にしてください。"
@@ -158,6 +158,7 @@ def main():
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
             "コメディ": "./font/PopRumCute.otf",
             "ホラー": "./font/onryou.TTF",
+            "雑学": "./font/Corporate-Logo-Rounded-Bold-ver3.otf"
         }
         font_settings = {
             "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
@@ -181,6 +182,7 @@ def main():
                 "暗い": "./audio/kurai.mp3",
                 "コメディ": "./audio/omosiro.mp3",
                 "ホラー": "./audio/horror.mp3",
+                "雑学": "./audio/zatugaku.mp3"
             }
             audio_placeholder.markdown(load_audio_base64(audio_path[mood]), unsafe_allow_html=True)
      
