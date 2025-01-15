@@ -156,7 +156,7 @@ def main():
         font_path = {
             "明るい": "./font/001Shirokuma-Regular.otf",
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
-            "コメディ": "./font/pugnomincho-mini.otf",
+            "コメディ": "./font/PopRumCute.otf",
             "ホラー": "./font/onryou.TTF",
         }
         font_settings = {
