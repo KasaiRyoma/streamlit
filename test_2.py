@@ -157,7 +157,7 @@ def main():
             "明るい": "./font/001Shirokuma-Regular.otf",
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
             "コメディ": "./font/pugnomincho-mini.otf",
-            "ホラー": "./font/ibaraji04.ttf",
+            "ホラー": "./font/onryou.TTF",
         }
         font_settings = {
             "小": {50: ("2.9em", "1.5"), 100: ("2.3em", "1.3"), 150: ("2.0em", "1.0"), 200: ("1.8em", "1.0")},
