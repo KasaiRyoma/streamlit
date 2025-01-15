@@ -130,13 +130,13 @@ def main():
             query1_text = (
                 "この画像には何が写っていますか？単語で答えてください。"
                 "単語以外の文章は絶対に出力しないでください。"
-                "何も答えられない場合は不明と出力してください。"
+                "答えられない時は明るさをこたえてください。"
             )
         else:
             query1_text = (
                 "この画像には何が写っていますか？単語で答えてください。"
                 "単語以外の文章は絶対に出力しないでください。"
-                "何も答えられない場合は不明と出力してください。"
+                "答えられない時は明るさをこたえてください。"
             )
         response1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
@@ -189,24 +189,16 @@ def main():
             "大": {50: ("7.0em", "1.5"), 100: ("5.3em", "1.3"), 150: ("4.4em", "1.0"), 200: ("4.2em", "1.0")},
         }
         apply_font(load_font_base64(font_path[mood]), *font_settings[font_size][text_length])
-        if response1 == "不明":
-            st.markdown(
-                f"""
-                <div class="dynamic-text">
-                    {"画像が読み込めません"}
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-        else:
-            st.markdown(
-                f"""
-                <div class="dynamic-text">
-                    {response1}
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+
+        st.markdown(
+            f"""
+            <div class="dynamic-text">
+                {response2}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
         if sound_f == "オン":
             audio_path = {
                 "明るい": "./audio/akarui.mp3",
