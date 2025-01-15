@@ -191,7 +191,7 @@ def main():
         st.markdown(
             f"""
             <div class="dynamic-text">
-                {response2}
+                {response1}
             </div>
             """,
             unsafe_allow_html=True
