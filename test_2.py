@@ -170,7 +170,7 @@ def main():
                 ),
             }
         if response1 == "不明":
-            response2 = "画像をうまく解析できませんでした。"   
+            response2 = "画像をうまく解析できませんでした。もう一度撮影してください。"   
         else:
             response2 = chatgpt(llm, query2_text[kana])    
 
@@ -191,7 +191,7 @@ def main():
         st.markdown(
             f"""
             <div class="dynamic-text">
-                {response1}
+                {response2}
             </div>
             """,
             unsafe_allow_html=True
