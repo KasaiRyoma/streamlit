@@ -130,12 +130,14 @@ def main():
             query1_text = (
                 "この画像には何が写っていますか？単語で答えてください。"
                 "単語以外の文章は絶対に出力しないでください。"
+                "何が写っているか不明な場合は不明という単語を出力してください。"
             )
         else:
             query1_text = (
                 "この画像には何が写っていますか？単語で答えてください。"
                 "単語以外の文章は絶対に出力しないでください。"
                 "複数こたえられるときは複数こたえてください。"
+                "何が写っているか不明な場合は不明という単語を出力してください。"
             )
         response1 = chatgpt(llm, query1_text, image_base64(camera_input))        
 
@@ -173,7 +175,10 @@ def main():
                     f"文章の雰囲気は{mood}にしてください。"
                 ),
             }
-        response2 = chatgpt(llm, query2_text[kana])   
+        if response1 == "不明":
+            response2 = "画像をうまく解析できませんでした。"   
+        else:
+            response2 = chatgpt(llm, query2_text[kana])    
 
         font_path = {
             "明るい": "./font/001Shirokuma-Regular.otf",
