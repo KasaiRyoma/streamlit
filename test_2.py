@@ -173,7 +173,7 @@ def main():
                     f"文章の雰囲気は{mood}にしてください。"
                 ),
             }
-        if response1 == "不":
+        if response1 == "不明":
             response2 = "画像をうまく解析できませんでした。もう一度撮影してください。"   
         else:
             response2 = chatgpt(llm, query2_text[kana])    
