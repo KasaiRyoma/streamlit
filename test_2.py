@@ -177,7 +177,7 @@ def main():
             response2 = "画像をうまく解析できませんでした。もう一度撮影してください。"   
         else:
             response2 = chatgpt(llm, query2_text[kana])    
-
+            response2 = "aAあア亜"
         font_path = {
             "明るい": "./font/001Shirokuma-Regular.otf",
             "暗い": "./font/OtsutomeFont_Ver3_16.ttf",
